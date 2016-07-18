@@ -13,7 +13,7 @@ namespace AirlinePlanner
     private DateTime? _departureTime;
     private DateTime? _arrivalTime;
     private string _status;
-    public Flight (string Name, string DepartureCity, string ArrivalCity, DateTime? DepartureTime, DateTime? ArrivalTime, string Status, int ID = 0)
+    public Flight (string Name, string DepartureCity, string ArrivalCity, DateTime? DepartureTime, DateTime? ArrivalTime, string Status, int Id = 0)
     {
       _id = Id;
       _name = Name;
@@ -29,7 +29,7 @@ namespace AirlinePlanner
     }
     public string GetName()
     {
-      return _string;
+      return _name;
     }
     public void SetName (string newName)
     {
@@ -77,7 +77,33 @@ namespace AirlinePlanner
     }
     public static List<Flight> GetAll()
     {
-      SqlConnection conn =
+      List<Flight> allFlights = new List<Flight> {};
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlDataReader rdr = null;
+      SqlCommand cmd = new SqlCommand ("SELECT * FROM flights;", conn);
+      rdr = cmd.ExecuteReader();
+      while (rdr.Read())
+      {
+        int flightId = rdr.GetInt32(0);
+        string flightName = rdr.GetString(1);
+        string departureCity = rdr.GetString(2);
+        string arrivalCity = rdr.GetString(3);
+        DateTime? departureTime = rdr.GetDateTime(4);
+        DateTime? arrivalTime = rdr.GetDateTime(5);
+        string flightStatus = rdr.GetString(6);
+        Flight newFlight = new Flight (flightName, departureCity, arrivalCity, departureTime, arrivalTime, flightStatus, flightId);
+        allFlights.Add(newFlight);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return allFlights;
     }
   }
 }

@@ -20,7 +20,7 @@ namespace AirlinePlanner
     }
     public void Dispose()
     {
-      Flight.DeleteAll();
+      // Flight.DeleteAll();
     }
   }
 }
