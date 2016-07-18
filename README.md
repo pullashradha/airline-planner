@@ -1,6 +1,6 @@
-# (Project Name) Webpage
+# Airline Planner Webpage
 
-#### (Week Name) Independent Project for Epicodus, 00/00/2016
+#### Project for Epicodus, 07/18/2016
 
 ## Description
 
@@ -13,8 +13,8 @@ This program can only be accessed on a PC with Windows 10, and with Git, Atom, a
 * Clone this repository
 * Import the database and test database:
   * Open SSMS
-  * Select the following buttons from the top nav bar to open the database scripts file: File>Open>File>"Desktop\RepositoryName\Sql Databases\database_name.sql"
-  * Save the database_name.sql file
+  * Select the following buttons from the top nav bar to open the database scripts file: File>Open>File>"Desktop\AirlinePlanner\Sql Databases\airline_planner.sql"
+  * Save the airline_planner.sql file
   * To create the database: click the "!Execute" button on the top nav bar
   * Repeat the above steps to import the test database
 * Test the program:

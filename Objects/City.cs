@@ -8,16 +8,14 @@ namespace AirlinePlanner
   {
     private int _id;
     private string _name;
-
-    public City(string Name, int Id = 0)
+    public City (string Name, int Id = 0)
     {
       _id = Id;
       _name = Name;
     }
-
-    public override bool Equals(System.Object otherCity)
+    public override bool Equals (System.Object otherCity)
     {
-      if(!(otherCity is City))
+      if (!(otherCity is City))
       {
         return false;
       }
@@ -29,21 +27,18 @@ namespace AirlinePlanner
         return (idEquality && nameEquality);
       }
     }
-
     public int GetId()
     {
       return _id;
     }
-
     public string GetName()
     {
       return _name;
     }
-    public void SetName(string newName)
+    public void SetName (string newName)
     {
       _name = newName;
     }
-
     public static List<City> GetAll()
     {
       List<City> AllCities = new List<City> {};
@@ -52,26 +47,25 @@ namespace AirlinePlanner
       SqlDataReader rdr = null;
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("SELECT * FROM cities;", conn);
+      SqlCommand cmd = new SqlCommand ("SELECT * FROM cities;", conn);
       rdr = cmd.ExecuteReader();
 
-      while(rdr.Read())
+      while (rdr.Read())
       {
         int cityId = rdr.GetInt32(0);
         string cityName = rdr.GetString(1);
         City newCity = new City(cityName, cityId);
         AllCities.Add(newCity);
       }
-      if(rdr != null)
+      if (rdr != null)
       {
         rdr.Close();
       }
-      if(conn != null)
+      if (conn != null)
       {
         conn.Close();
       }
       return AllCities;
     }
-
   }
 }
