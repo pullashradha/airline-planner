@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 
 namespace AirlinePlanner
 {
-  public class Example
+  public class City
   {
 
   }

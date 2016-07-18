@@ -6,7 +6,7 @@ using Xunit;
 
 namespace AirlinePlanner
 {
-  public class ExampleTest : IDisposable
+  public class FlightTest : IDisposable
   {
     public ExampleTest()
     {
