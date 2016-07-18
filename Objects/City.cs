@@ -91,6 +91,39 @@ namespace AirlinePlanner
         conn.Close();
       }
     }
+    public static City Find(int Id)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlDataReader rdr = null;
+
+      SqlCommand cmd = new SqlCommand ("SELECT * FROM cities WHERE id=@CityId;", conn);
+      SqlParameter cityIdParameter = new SqlParameter();
+      cityIdParameter.ParameterName = "@CityId";
+      cityIdParameter.Value = Id;
+      cmd.Parameters.Add(cityIdParameter);
+      rdr = cmd.ExecuteReader();
+
+      int foundCityId = 0;
+      string foundCityName = null;
+
+      while (rdr.Read())
+      {
+        foundCityId = rdr.GetInt32(0);
+        foundCityName = rdr.GetString(1);
+      }
+      City foundCity = new City(foundCityName, foundCityId);
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return foundCity;
+    }
     public static void DeleteAll()
     {
       SqlConnection conn = DB.Connection();
