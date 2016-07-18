@@ -124,5 +124,30 @@ namespace AirlinePlanner
       }
       return allFlights;
     }
+    public void Save()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlDataReader rdr;
+
+      SqlCommand cmd = new SqlCommand("INSERT INTO flights (name, departure_city, arrival_city, departure_time, arrival_time, status) OUTPUT INSERTED.id VALUES (@FlightName, @FlightDepartureCity, @FlightArrivalCity, @FlightDepartureTime, @FlightArrivalTime, @FlightStatus);", conn);
+
+      SqlParameter nameParameter = new SqlParameter();
+      nameParameter.ParameterName = "@FlightName";
+      nameParameter.Value = this.GetName();
+
+      SqlParameter departureCityParameter = new SqlParameter();
+      departureCityParameter.ParameterName = "@FlightDepartureCity";
+      departureCityParameter.Value = this.GetDepartureCity();
+
+      SqlParameter arrivalCityParameter = new SqlParameter();
+      arrivalCityParameter.ParameterName = "@FlightArrivalCity";
+      arrivalCityParameter.Value = this.GetArrivalTime();
+
+      SqlParameter departureTimeParameter = new SqlParameter();
+      departureTimeParameter.ParameterName = "@FlightDepartureTime";
+      departureTimeParameter.Value = this.GetDepartureTime();
+    }
+
   }
 }

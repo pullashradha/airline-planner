@@ -25,6 +25,18 @@ namespace AirlinePlanner
       Flight secondFlight = new Flight ("AA321", "Hyderabad", "Dubai", new DateTime(2016, 7, 16, 10, 00, 00), new DateTime(2016, 7, 16, 21, 00, 00), "On Time");
       Assert.Equal(firstFlight, secondFlight);
     }
+    [Fact]
+    public void  test_Save_SavetoDatabase()
+    {
+      Flight firstFlight = new Flight("AA321", "Hyderabad", "Dubai", new DateTime(2016, 7, 16, 10, 00, 00), new DateTime(2016, 7, 16, 21, 00, 00), "On Time");
+      firstFlight.Save();
+
+      List<Flight> allFlights = new List<Flight>{firstFlight};
+      List<Flight> results = Flight.GetAll();
+
+      Assert.Equal(allFlights, results);
+
+    }
     public void Dispose()
     {
       // Flight.DeleteAll();
