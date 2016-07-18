@@ -23,6 +23,25 @@ namespace AirlinePlanner
       _arrivalTime = ArrivalTime;
       _status = Status;
     }
+    public override bool Equals (System.Object otherFlight)
+    {
+      if (otherFlight is Flight)
+      {
+        Flight newFlight = (Flight) otherFlight;
+        bool flightIdEquality = (this.GetId() == newFlight.GetId());
+        bool flightNameEquality = (this.GetName() == newFlight.GetName());
+        bool departureCityEquality = (this.GetDepartureCity() == newFlight.GetDepartureCity());
+        bool arrivalCityEquality = (this.GetArrivalCity() == newFlight.GetArrivalCity());
+        bool departureTimeEquality = (this.GetDepartureTime() == newFlight.GetDepartureTime());
+        bool arrivalTimeEquality = (this.GetArrivalTime() == newFlight.GetArrivalTime());
+        bool flightStatusEquality = (this.GetStatus() == newFlight.GetStatus());
+        return (flightNameEquality && departureCityEquality && arrivalCityEquality && departureTimeEquality && arrivalTimeEquality && flightStatusEquality);
+      }
+      else
+      {
+        return false;
+      }
+    }
     public int GetId()
     {
       return _id;
