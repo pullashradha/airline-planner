@@ -67,5 +67,36 @@ namespace AirlinePlanner
       }
       return AllCities;
     }
+    public void Save()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlDataReader rdr;
+      SqlCommand cmd = new SqlCommand ("INSERT INTO cities (name) OUTPUT INSERTED.id VALUES (@CityName);", conn);
+      SqlParameter nameParameter = new SqlParameter ();
+      nameParameter.ParameterName = "@CityName";
+      nameParameter.Value = this.GetName();
+      cmd.Parameters.Add(nameParameter);
+      rdr = cmd.ExecuteReader();
+      while (rdr.Read())
+      {
+        this._id = rdr.GetInt32(0);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
+    public static void DeleteAll()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlCommand cmd = new SqlCommand ("DELETE FROM cities;", conn);
+      cmd.ExecuteNonQuery();
+    }
   }
 }
